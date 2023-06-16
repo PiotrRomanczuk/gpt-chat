@@ -1,11 +1,13 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 const { Configuration, OpenAIApi } = require('openai');
 
 const app = express();
 const port = 9000;
 
 app.use(express.json());
+app.use(cors());
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -17,8 +19,11 @@ app.get('/chatgpt', async (req, res) => {
   try {
     const chatCompletion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
-		messages: [
-			{ role: 'system', content: 'tell me somthing funny.' },
+      messages: [
+    
+        // Content has to be a parameter from the input field of client
+      
+			{ role: 'system', content: 'tell me something funny.' },
 			],
     });
 
@@ -32,11 +37,26 @@ app.get('/chatgpt', async (req, res) => {
 });
 
 
+app.get('/chatgpt', async (req, res) => {
+  try {
+    const { content } = req.body;
+    
+    const chatCompletion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'system', content },
+      ],
+    });
 
-
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
+    const response = chatCompletion.data.choices[0].message.content;
+    console.log(response);
+    res.json({ response });
+  } catch (error) {
+    console.error('Failed to process chat request:', error);
+    res.status(500).json({ error: 'Failed to process chat request' });
+  }
 });
+
 
 
 app.listen(port, () => {
