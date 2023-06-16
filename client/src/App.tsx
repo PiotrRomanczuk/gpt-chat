@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react';
+
+import Input from './components/Input';
+import Button from './components/Button';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState('');
 
+  const [response, setResponse] = useState('');
+
+  const handleButtonClick = () => {
+
+    // get the input value
+    
+    // make an async function call to the API
+
+    // update the state with the response from the API
+
+
+  };
+  
+
+
+
+      // fetch('/api/endpoint', {
+      //   method: 'POST',
+      //   body: JSON.stringify({ data: inputValue }),
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+  
+      //     console.log(data);
+      //   })
+      //   .catch((error) => {
+  
+      //     console.error(error);
+      //   });
+
+  
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <Input value={inputValue} onChange={setInputValue} />
+      <Button onClick={handleButtonClick} />
+    </div>
+  );
 }
+
 
 export default App
