@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import InputComponent from '../UI/InputComponent';
 
-const ChatComponent: React.FC = () => {
+const ChatComponent = () => {
   const [response, setResponse] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    console.log(inputValue);
+  };
 
   const fetchData = async () => {
     const data = {
-      content: 'tell me something funny.',
+      content: inputValue,
     };
 
     try {
@@ -27,7 +33,7 @@ const ChatComponent: React.FC = () => {
 
   return (
     <div>
-      <InputComponent value='' onChange={setResponse}/>
+      <InputComponent value={inputValue} onChange={handleInputChange} />
       <button onClick={fetchData}>Fetch Data</button>
       {response && <p>{response}</p>}
     </div>

@@ -15,6 +15,11 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+
+app.get('/', (req, res) => { 
+  res.json({ message: 'Hello World!' });
+})
+
 app.get('/chatgpt', async (req, res) => {
   try {
     const chatCompletion = await openai.createChatCompletion({

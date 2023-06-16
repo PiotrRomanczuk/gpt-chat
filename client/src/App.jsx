@@ -1,15 +1,14 @@
 import './App.css'
-
-import ChatComponent from './components/Logic/ChatComponent';
+import ChatComponent from './components/Logic/ChatComponent'
 
 function App() {
 
-  return (
-    <div>
-      <ChatComponent />
-    </div>
-  );
-}
 
+  return (
+    <>
+      <ChatComponent />
+    </>
+  )
+}
 
 export default App
