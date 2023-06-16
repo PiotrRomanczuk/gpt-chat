@@ -19,3 +19,8 @@ Server:
 
         Messenger:
             https://developers.facebook.com/docs/messenger-platform/send-messages/
+
+
+Database (SQLite?):
+
+    1. Setting up the database to store all the prompts messages and responses
