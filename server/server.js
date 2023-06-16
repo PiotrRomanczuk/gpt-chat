@@ -30,6 +30,30 @@ app.get('/chatgpt', async (req, res) => {
   }
 });
 
+
+app.post('/chatgpt', async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    const chatCompletion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+		messages: [
+			{ role: 'system', content: 'You are a helpful assistant.' },
+			{ role: 'user', content: message }],
+    });
+
+    const response = chatCompletion.data.choices[0].message.content;
+    res.json({ response });
+  } catch (error) {
+    console.error('Failed to process chat request:', error);
+    res.status(500).json({ error: 'Failed to process chat request' });
+  }
+});
+
+
+
+
+
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
