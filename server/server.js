@@ -42,7 +42,7 @@ app.get('/chatgpt', async (req, res) => {
 });
 
 
-app.get('/chatgpt', async (req, res) => {
+app.post('/chatgpt', async (req, res) => {
   try {
     const { content } = req.body;
     
