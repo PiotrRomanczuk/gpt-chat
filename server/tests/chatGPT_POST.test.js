@@ -1,4 +1,5 @@
 const request = require('supertest');
+const { expect } = require('chai')
 const app = require('../server');
 
 describe('/chatgpt', () => {
@@ -21,7 +22,7 @@ describe('/chatgpt', () => {
 
         done();
       });
-  });
+  }).timeout(50000);
 
   it('should handle errors and respond with a 500 status code', (done) => {
     const requestBody = {

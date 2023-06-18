@@ -75,6 +75,8 @@ app.post('/chatgpt', async (req, res) => {
   
   try {
     const { content } = req.body;
+    
+    console.log(content);
 
     const chatCompletion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
@@ -82,6 +84,8 @@ app.post('/chatgpt', async (req, res) => {
         { role: 'system', content },
       ],
     });
+
+    console.log(chatCompletion);
 
     const response = chatCompletion.data.choices[0].message.content;
     console.log(response);
