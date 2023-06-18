@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"start": "nodemon server.js"
+		"start": "nodemon server.js",
+		 "test": "mocha tests/**/*test.js"
 	},
 	"name": "server",
 	"version": "1.0.0",
@@ -18,5 +19,9 @@
 		"mongoose": "^7.3.0",
 		"nodemon": "^2.0.22",
 		"openai": "^3.2.1"
+	},
+	"devDependencies": {
+		"mocha": "^10.2.0",
+		"supertest": "^6.3.3"
 	}
 }

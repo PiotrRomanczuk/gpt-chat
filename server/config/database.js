@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const MONGO_URI = process.env.MONGODB_URI;
 
-exports.connect = () => {
+const connect = () => {
   // Connecting to the database
   mongoose
     .connect(MONGO_URI, {
@@ -18,3 +18,5 @@ exports.connect = () => {
       process.exit(1);
     });
 };
+
+module.exports = connect;
