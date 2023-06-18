@@ -7,20 +7,24 @@ Client:
 Server:
 
     ChatGPT:
-
         1. Setting up the connection to the ChatGPT API - done
         2. Setting
 
 
+    ChatGPT Models:
+        GPT-3.5
+        DALL·E - img generator
+        Whisper - audio to txt converter
+
+
     Whatsup/Messenger:
-
         WhatsupAPI works only with business profiles
-
-
-        Messenger:
-            https://developers.facebook.com/docs/messenger-platform/send-messages/
+        Messenger:        https://developers.facebook.com/docs/messenger-platform/send-messages/
 
 
 Database (SQLite?):
-
     1. Setting up the database to store all the prompts messages and responses
+
+
+Authentication / Autorization
+
