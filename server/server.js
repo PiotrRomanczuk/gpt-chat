@@ -1,21 +1,49 @@
+// Packages
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+const auth = require("./middleware/auth");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+//Routes
+const notFoundHandler = require("./routes/notFound");
+const chatPrompt = require('./routes/ChatPrompt');
+const Register = require('./routes/register');
+const Login = require('./routes/login');
+
+// DB
+const connectDB = require("./config/database")
+const User = require("./models/user");
+
+// OpenAI API
 const { Configuration, OpenAIApi } = require('openai');
-
-require("./config/database").connect()
-
-const app = express();
-const port = 9000;
-
-app.use(express.json());
-app.use(cors());
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
+
+// Server
+const app = express();
+const PORT = 9000;
+
+const startServer = async () => { 
+    try {
+      await connectDB();  
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`)
+      })
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+startServer()
+
+app.use(express.json());
+app.use(cors());
 
 
 app.get('/', (req, res) => { 
@@ -27,10 +55,10 @@ app.get('/chatgpt', async (req, res) => {
     const chatCompletion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [
-    
-        // Content has to be a parameter from the input field of client
-      
-			{ role: 'system', content: 'tell me something funny.' },
+        {
+          role: 'system',
+          content: 'tell me something funny.'
+        },
 			],
     });
 
@@ -43,11 +71,11 @@ app.get('/chatgpt', async (req, res) => {
   }
 });
 
-
 app.post('/chatgpt', async (req, res) => {
+  
   try {
     const { content } = req.body;
-    
+
     const chatCompletion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [
@@ -64,8 +92,16 @@ app.post('/chatgpt', async (req, res) => {
   }
 });
 
+// Register
+app.post("/register", Register);
 
+// Login
+app.post("/login", Login);
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.post("/welcome", auth, (req, res) => {
+  res.status(200).send("Welcome 🙌 ");
 });
+
+app.use("*", notFoundHandler);
+
+module.exports = app;
