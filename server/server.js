@@ -3,6 +3,8 @@ require('dotenv').config();
 const cors = require('cors');
 const { Configuration, OpenAIApi } = require('openai');
 
+require("./config/database").connect()
+
 const app = express();
 const port = 9000;
 
