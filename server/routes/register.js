@@ -17,12 +17,9 @@ const Register = async (req, res) => {
     console.log(req.body);
 
 
-    // ----------------------------------------------------------------
-    //Why the fuck req.body is empty?
-    // ----------------------------------------------------------------
-
     // Validate user input
-    if (!(first_name)) {
+    if (!first_name) {
+      console.log("first_name is required")
       res.status(400).send("First Name is required");
       return; 
     }
@@ -39,19 +36,6 @@ const Register = async (req, res) => {
 
     if (!(password)) {
       res.status(400).send("Password is required");
-      return; 
-    }
-
-    // ----------------------------------------------------------------
-    //  Validation password and email logic here 
-    // ----------------------------------------------------------------
-
-
-    //Encrypt user password
-
-    // Validate user input
-    if (!(email)) {
-      res.status(400).send("Email is required");
       return; 
     }
 

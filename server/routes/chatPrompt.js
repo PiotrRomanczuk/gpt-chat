@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 const { Configuration, OpenAIApi } = require('openai');
 
 const configuration = new Configuration({

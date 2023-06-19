@@ -38,18 +38,16 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "email",
-							"value": "a@a.pl",
-							"type": "text",
-							"disabled": true
+					"mode": "raw",
+					"raw": "{\n    \"first_Name\": \"Piotr\",\n    \"last_Name\": \"Romanczuk\",\n    \"email\": \"p.romanczuk@gmail.com\",\n    \"password\": \"oCieChujuZadzialaj\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/register?email=a@a.pl",
+					"raw": "http://localhost:9000/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -57,12 +55,6 @@
 					"port": "9000",
 					"path": [
 						"register"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "a@a.pl"
-						}
 					]
 				}
 			},
