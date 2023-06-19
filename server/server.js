@@ -16,6 +16,10 @@ const Login = require('./routes/login');
 const connectDB = require("./config/database")
 const User = require("./models/user");
 
+// Middleware
+const savePrompts = require("./middleware/savePrompts");
+
+
 // OpenAI API
 const { Configuration, OpenAIApi } = require('openai');
 
@@ -50,7 +54,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hello World!' });
 })
 
-app.post('/chatgpt', chatPrompt);
+app.post('/chatgpt',savePrompts, chatPrompt);
 
 // Register
 app.post("/register", Register);

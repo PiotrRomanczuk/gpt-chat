@@ -6,11 +6,6 @@ Client:
 
 Server:
 
-    ChatGPT:
-        1. Setting up the connection to the ChatGPT API - done
-        2. Setting
-
-
     ChatGPT Models:
         GPT-3.5
         DALL·E - img generator
@@ -23,8 +18,20 @@ Server:
 
 
 Database (SQLite?):
-    1. Setting up the database to store all the prompts messages and responses
+
+    1. Setting up the connection to the database - done
+    2. Setting up the database to store all the prompts messages and responses - ??
+
+
+Middlewares:
+
+    1. Saving the prompts and responses - ??
+
 
 
 Authentication / Autorization
 
+    - Setting up the registration and login process - ??
+    - Setting up the authentication middleware - ??
+
+    
