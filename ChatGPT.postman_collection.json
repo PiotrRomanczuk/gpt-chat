@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "c374e3c7-2f5e-4d5a-8ee5-7c67b8771faa",
+		"name": "ChatGPT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24663774"
+	},
+	"item": [
+		{
+			"name": "New ChatGPT Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/chatgpt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"chatgpt"
+					],
+					"query": [
+						{
+							"key": "messege",
+							"value": "tell me somthing funny",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "a@a.pl",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/register?email=a@a.pl",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "a@a.pl"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

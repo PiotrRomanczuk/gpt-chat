@@ -1,17 +1,63 @@
 const express = require('express');
-const router = express.Router();
+
+// const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+
 
 const Register = async (req, res) => {
-
-  // Our register logic starts here
   try {
-    // Get user input
-    const { first_name, last_name, email, password } = req.body;
+    const {
+      first_name,
+      last_name,
+      email,
+      password
+    } = req.body;
+
+    console.log(req.body);
+
+
+    // ----------------------------------------------------------------
+    //Why the fuck req.body is empty?
+    // ----------------------------------------------------------------
 
     // Validate user input
-    if (!(email && password && first_name && last_name)) {
-      res.status(400).send("All input is required");
+    if (!(first_name)) {
+      res.status(400).send("First Name is required");
+      return; 
     }
+
+    if (!(last_name)) {
+      res.status(400).send("Last Name is required");
+      return; 
+    }
+
+    if (!(email)) {
+      res.status(400).send("Email is required");
+      return; 
+    }
+
+    if (!(password)) {
+      res.status(400).send("Password is required");
+      return; 
+    }
+
+    // ----------------------------------------------------------------
+    //  Validation password and email logic here 
+    // ----------------------------------------------------------------
+
+
+    //Encrypt user password
+
+    // Validate user input
+    if (!(email)) {
+      res.status(400).send("Email is required");
+      return; 
+    }
+
+    // ----------------------------------------------------------------
+    //  Validation password and email logic here 
+    // ----------------------------------------------------------------
 
     // check if user already exist
     // Validate if user exist in our database
@@ -22,7 +68,7 @@ const Register = async (req, res) => {
     }
 
     //Encrypt user password
-    encryptedPassword = await bcrypt.hash(password, 10);
+    // encryptedPassword = await bcrypt.hash(password, 10);
     // encryptedPassword = password;
 
     // Create user in our database
@@ -31,13 +77,13 @@ const Register = async (req, res) => {
       last_name,
       email: email,
       // email: email.toLowerCase(), // sanitize: convert email to lowercase
-      password: encryptedPassword,
+      password: password,
     });
 
     // Create token
     const token = jwt.sign(
       { user_id: user._id, email },
-      process.env.TOKEN_KEY,
+      // process.env.TOKEN_KEY,
       {
         expiresIn: "2h",
       }
@@ -50,7 +96,7 @@ const Register = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  // Our register logic ends here
 }
+ 
 
 module.exports = Register;

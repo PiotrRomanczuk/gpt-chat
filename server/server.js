@@ -50,51 +50,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hello World!' });
 })
 
-app.get('/chatgpt', async (req, res) => {
-  try {
-    const chatCompletion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: 'tell me something funny.'
-        },
-			],
-    });
-
-	  const response = chatCompletion.data.choices[0].message.content;
-	  console.log(response)
-    res.json({ response });
-  } catch (error) {
-    console.error('Failed to process chat request:', error);
-    res.status(500).json({ error: 'Failed to process chat request' });
-  }
-});
-
-app.post('/chatgpt', async (req, res) => {
-  
-  try {
-    const { content } = req.body;
-    
-    console.log(content);
-
-    const chatCompletion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content },
-      ],
-    });
-
-    console.log(chatCompletion);
-
-    const response = chatCompletion.data.choices[0].message.content;
-    console.log(response);
-    res.json({ response });
-  } catch (error) {
-    console.error('Failed to process chat request:', error);
-    res.status(500).json({ error: 'Failed to process chat request' });
-  }
-});
+app.post('/chatgpt', chatPrompt);
 
 // Register
 app.post("/register", Register);
