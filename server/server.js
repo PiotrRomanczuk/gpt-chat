@@ -1,6 +1,7 @@
 // Packages
-const express = require('express');
 require('dotenv').config();
+require('express-async-errors');
+const express = require('express');
 const cors = require('cors');
 const auth = require("./middleware/auth");
 const bcrypt = require("bcryptjs");
