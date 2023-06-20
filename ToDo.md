@@ -31,6 +31,10 @@ Middlewares:
 
 Authentication / Autorization
 
+    Email authentication
+    Social Media Authentication
+
+
     - Setting up the registration and login process - ??
     - Setting up the authentication middleware - ??
 
