@@ -1,14 +1,19 @@
-const Login = async (req, res) => {
+const LoginOld = async (req, res) => {
 
   // Our login logic starts here
   try {
     // Get user input
-    const { email, password } = req.body;
+    const { email, password} = req.body;
+
+    console.log(req.body)
+
 
     // Validate user input
     if (!(email && password)) {
       res.status(400).send("All input is required");
     }
+
+
     // Validate if user exist in our database
     const user = await User.findOne({ email });
 
@@ -35,4 +40,4 @@ const Login = async (req, res) => {
   // Our register logic ends here
 }
 
-module.exports = Login;
+module.exports = LoginOld;

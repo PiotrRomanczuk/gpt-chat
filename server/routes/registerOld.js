@@ -8,17 +8,22 @@ const User = require("../models/user");
 const Register = async (req, res) => {
   try {
     const {
-      first_name,
-      last_name,
-      email,
-      password
+      first_name: FN,
+      last_name: LN,
+      email: EM,
+      password: PS
     } = req.body;
+
+    console.log(`First Name: ${FN}`);
+    console.log(`Last Name: ${LN}`);
+    console.log(`Email: ${EM}`);
+    console.log(`Password: ${PS}`);
 
     console.log(req.body);
 
 
     // Validate user input
-    if (!first_name) {
+    if (!FN) {
       console.log("first_name is required")
       res.status(400).send("First Name is required");
       return; 
@@ -57,16 +62,13 @@ const Register = async (req, res) => {
 
     // Create user in our database
     const user = await User.create({
-      first_name,
-      last_name,
-      email: email,
-      // email: email.toLowerCase(), // sanitize: convert email to lowercase
-      password: password,
+      email: email.toLowerCase(), // sanitize: convert email to lowercase
+      password
     });
 
     // Create token
     const token = jwt.sign(
-      { user_id: user._id, email },
+      { user_id: user._id, EM },
       // process.env.TOKEN_KEY,
       {
         expiresIn: "2h",
@@ -78,7 +80,7 @@ const Register = async (req, res) => {
     // return new user
     res.status(201).json(user);
   } catch (err) {
-    console.log(err);
+    console.log(`Error: ${err}`);
   }
 }
  

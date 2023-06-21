@@ -9,8 +9,8 @@ const jwt = require("jsonwebtoken");
 //Routes
 const notFoundHandler = require("./routes/notFound");
 const chatPrompt = require('./routes/ChatPrompt');
-const Register = require('./routes/register');
-const Login = require('./routes/login');
+const RegisterNew = require('./routes/registerNew');
+const Login = require('./routes/Login');
 
 // DB
 const connectDB = require("./config/database")
@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 app.post('/chatgpt',savePrompts, chatPrompt);
 
 // Register
-app.post("/register", Register);
+app.post("/register", RegisterNew);
 
 // Login
 app.post("/login", Login);
