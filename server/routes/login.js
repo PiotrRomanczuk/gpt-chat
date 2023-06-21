@@ -16,25 +16,29 @@ const Login = async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
 
-      // Create token
-      const token = jwt.verify(
-        { user_id: user._id, email },
-        process.env.TOKEN_KEY,
+// Creating the token for the user
+      const token = jwt.sign(
         {
-          expiresIn: "1m",
+          user_id: user._id,
+          email
+        },
+        process.env.TOKEN_KEY,
+        console.log(process.env.TOKEN_KEY),
+        
+        {
+          expiresIn: "1h",
         }
       );
       
-      
-      // save user token
+
       user.token = token;
 
-      // Send user object as response
+
       console.log("User logged in");
       return res.status(200).json(user);
 }
 
-      // Invalid credentials response
+
     return res.status(400).send("Invalid Credentials");
     
         } catch (err) {
