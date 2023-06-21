@@ -1,11 +1,9 @@
-const LoginOld = async (req, res) => {
+const Login = async (req, res) => {
 
   // Our login logic starts here
   try {
     // Get user input
     const { email, password} = req.body;
-
-    console.log(req.body)
 
 
     // Validate user input
@@ -40,4 +38,4 @@ const LoginOld = async (req, res) => {
   // Our register logic ends here
 }
 
-module.exports = LoginOld;
+module.exports = Login;
