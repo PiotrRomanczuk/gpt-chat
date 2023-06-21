@@ -1,5 +1,5 @@
 // Import your database library or ORM
-const db = require('../config/database');
+const db = require('../config/databaseConnection');
 
 const savePrompts = async (req, res, next) => {
   try {

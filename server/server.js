@@ -17,7 +17,7 @@ const Login = require('./routes/Login');
 const Delete = require('./controllers/deleteUser');
 
 // DB
-const connectDB = require("./config/database")
+const connectDB = require("./config/databaseConnection")
 
 // Middleware
 const errorHandler = require("./middleware/errorHandler");
@@ -61,6 +61,25 @@ app.post("/login", Login);
 app.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
+
+// app.get('/users/:id', (req, res) => {
+//   const userId = req.params.id;
+
+//   // Assuming your user model is called "User"
+//   User.findOne({ model: 'user', _id: userId }, (err, user) => {
+//     if (err) {
+//       console.error('Error finding user:', err);
+//       return res.status(500).json({ error: 'Internal server error' });
+//     }
+
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+
+//     return res.json(user);
+//   });
+// });
+
 
 app.post("/deleteUser", DeleteUser )
 

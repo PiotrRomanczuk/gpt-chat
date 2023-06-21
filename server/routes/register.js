@@ -43,7 +43,7 @@ const Register = async (req, res) => {
         encryptedPassword = await bcrypt.hash(password, 10);
 
         //Creating user in database
-
+ 
         const user = await User.create({
             user_id: user_id,
             first_name: first_name,
