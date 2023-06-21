@@ -9,17 +9,21 @@ const jwt = require("jsonwebtoken");
 //Routes
 const notFoundHandler = require("./routes/notFound");
 const chatPrompt = require('./routes/ChatPrompt');
-const RegisterNew = require('./routes/registerNew');
+
+// Users
+const User = require("./models/user");
+const Register = require('./routes/register');
 const Login = require('./routes/Login');
+const Delete = require('./controllers/deleteUser');
 
 // DB
 const connectDB = require("./config/database")
-const User = require("./models/user");
 
 // Middleware
 const errorHandler = require("./middleware/errorHandler");
 const savePrompts = require("./middleware/savePrompts");
 const auth = require("./middleware/auth");
+const DeleteUser = require('./controllers/deleteUser');
 
 // Server
 const app = express();
@@ -49,7 +53,7 @@ app.get('/', (req, res) => {
 app.post('/chatgpt',savePrompts, chatPrompt);
 
 // Register
-app.post("/register", RegisterNew);
+app.post("/register", Register);
 
 // Login
 app.post("/login", Login);
@@ -57,6 +61,8 @@ app.post("/login", Login);
 app.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
+
+app.post("/deleteUser", DeleteUser )
 
 app.use("*", notFoundHandler);
 

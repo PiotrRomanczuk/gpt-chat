@@ -1,7 +1,16 @@
 Client:
 
-    1. Passing the input parameters from client to the server
-    2. Fetching the response from the server 
+
+    ChatPrompts:
+
+        1. Passing the input parameters from client to the server
+        2. Fetching the response from the server 
+
+
+    Registration/Logging:
+
+        1. Preppaing the front for the logging and registration
+
 
 
 Server:
@@ -38,4 +47,4 @@ Authentication / Autorization
     - Setting up the registration and login process - ??
     - Setting up the authentication middleware - ??
 
-    
+

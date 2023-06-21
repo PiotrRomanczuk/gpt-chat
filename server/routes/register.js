@@ -2,7 +2,10 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const RegisterNew = async (req, res) => { 
+const fs = require("fs");
+const writeToFile = require("../controllers/writeToFile");
+
+const Register = async (req, res) => { 
 
     try {
         const { first_name, last_name, email, password } = req.body;
@@ -39,9 +42,6 @@ const RegisterNew = async (req, res) => {
 
         encryptedPassword = await bcrypt.hash(password, 10);
 
-
-     
-
         //Creating user in database
 
         const user = await User.create({
@@ -60,11 +60,22 @@ const RegisterNew = async (req, res) => {
             { user_id: user._id, email: user.email },
             process.env.TOKEN_KEY,
             {
-                expiresIn: "2min",
+                expiresIn: "1m",
             }
             );
-            // save user token
-            user.token = token;
+        // save user token
+        
+        //     const userIdString = user_id.toString();
+        //     const userTokenString = user.token.toString();
+
+        // console.log(userIdString + userTokenString)
+
+        // writeToFile('../files/token.txt', userIdString + userTokenString)
+        // writeToFile(token.toString())
+        
+        user.token = token;
+        
+    
             
             return res.status(201).json(user);
 
@@ -76,4 +87,4 @@ const RegisterNew = async (req, res) => {
 
 }
 
-module.exports = RegisterNew
+module.exports = Register
