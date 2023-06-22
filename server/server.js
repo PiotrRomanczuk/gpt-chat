@@ -8,20 +8,20 @@ const jwt = require("jsonwebtoken");
 
 //Routes
 const notFoundHandler = require("./routes/notFound");
-const chatPrompt = require('./routes/ChatPrompt');
+const chatPrompt = require('./controllers/chatPrompt');
 
 // Users
 const User = require("./models/user");
-const Register = require('./routes/register');
-const Login = require('./routes/Login');
+const Register = require('./controllers/register');
+const Login = require('./controllers/Login');
 const Delete = require('./controllers/deleteUser');
 
 // DB
-const connectDB = require("./config/databaseConnection")
+const connectDB = require("./config/MongoDBConnection")
 
 // Middleware
 const errorHandler = require("./middleware/errorHandler");
-const savePrompts = require("./middleware/savePrompts");
+const saveReq = require("./middleware/saveReq");
 const auth = require("./middleware/auth");
 const DeleteUser = require('./controllers/deleteUser');
 
@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hello World!' });
 })
 
-app.post('/chatgpt',savePrompts, chatPrompt);
+app.post('/chatgpt', chatPrompt);
 
 // Register
 app.post("/register", Register);
