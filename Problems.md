@@ -2,7 +2,8 @@ Big:
 
     Register.js:
 
-        - (wrong?) validation with req.body
+        - (wrong?) validation with req.body - solved - problem was the badly form of passing req.body
+        
 
 Med:
 
