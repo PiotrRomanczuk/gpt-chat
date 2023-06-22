@@ -1,6 +1,5 @@
-const User = require("../models/user");
+// const User = require("../models/user"); // MongoDBSchema - unused
 const bcrypt = require("bcryptjs");
-
 
 
 const Register = async (req, res) => { 

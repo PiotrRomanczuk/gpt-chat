@@ -17,9 +17,11 @@ const Register = require('./controllers/register');
 const Login = require('./controllers/Login');
 const Delete = require('./controllers/deleteUser');
 
+
 // DB
 const startDatabaseConnection = require("./config/sqLiteConnection"); // SQlite Connection
 const dbPath = path.join(__dirname, './database/users.db');
+// const createUser = require('./database/createUser');
 
 // const connectDB = require("./config/MongoDBConnection") // MongoDB Connection - unused
 
@@ -54,8 +56,9 @@ const startServer = async () => {
           app.listen(PORT, () => {
               console.log(`Server running on port ${PORT}`)
             })
-      } catch (err) {
-        console.log(err)
+      } 
+        catch (err) {
+          console.log(err)
     }
 }
 
@@ -80,6 +83,8 @@ app.post("/login", Login);
 app.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
+
+// app.get("/user", createUser)  
 
 // app.get('/users/:id', (req, res) => {
 //   const userId = req.params.id;
