@@ -1,10 +1,10 @@
 // Import your database library or ORM
 const db = require('../config/MongoDBConnection');
-const chatPrompt = require('../controllers/chatPrompt');
+const chatPrompt = require('./chatPrompt');
 
 const prompt = require('../models/prompt')
 
-const saveReq = async (req, res, next) => {
+const savePrompt = async (req, res, next) => {
   try {
     // Save the request and response to the database
     
@@ -22,4 +22,4 @@ const saveReq = async (req, res, next) => {
   }
 };
 
-module.exports = saveReq;
+module.exports = savePrompt;

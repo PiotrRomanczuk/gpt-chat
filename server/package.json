@@ -22,7 +22,8 @@
 		"mongoose": "^7.3.0",
 		"nodemon": "^2.0.22",
 		"openai": "^3.2.1",
-		"sinon": "^15.2.0"
+		"sinon": "^15.2.0",
+		"sqlite3": "^5.1.6"
 	},
 	"devDependencies": {
 		"chai": "^4.3.7",

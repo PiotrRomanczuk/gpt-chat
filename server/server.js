@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const path = require('path');
 
 //Routes
 const notFoundHandler = require("./routes/notFound");
@@ -17,11 +18,15 @@ const Login = require('./controllers/Login');
 const Delete = require('./controllers/deleteUser');
 
 // DB
-const connectDB = require("./config/MongoDBConnection")
+const startDatabaseConnection = require("./config/sqLiteConnection"); // SQlite Connection
+const dbPath = path.join(__dirname, './database/users.db');
+
+// const connectDB = require("./config/MongoDBConnection") // MongoDB Connection - unused
+
 
 // Middleware
 const errorHandler = require("./middleware/errorHandler");
-const saveReq = require("./middleware/saveReq");
+const savePrompt = require("./controllers/savePrompt");
 const auth = require("./middleware/auth");
 const DeleteUser = require('./controllers/deleteUser');
 
@@ -31,11 +36,25 @@ const PORT = 9000;
 
 const startServer = async () => { 
     try {
-      await connectDB();  
-      app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`)
-      })
-    } catch (err) {
+      startDatabaseConnection(dbPath)
+          .then((db) => {
+            db.all('SELECT * FROM users', (err, rows) => {
+              if (err) {
+                console.error(err.message);
+              } else {
+                console.log(rows);
+              }
+            });
+          })
+        
+          .catch((err) => {
+            console.error('Error connecting to the database:', err);
+          });  
+          
+          app.listen(PORT, () => {
+              console.log(`Server running on port ${PORT}`)
+            })
+      } catch (err) {
         console.log(err)
     }
 }
