@@ -4,6 +4,20 @@ const createUser = async (user) => {
  
     return new Promise((resolve, reject) => {
       
+      const user = await new Promise((resolve, reject) => { 
+        let {
+          user_id,
+          username,
+          password,
+          email } = req.body.user;
+      
+        if (!user) {
+          reject('No user provided.');
+          console.log(`User ${user} not provided.`);
+        }
+      
+      )
+
         if (isDatabaseConnected()) {             
             db.run(
             'INSERT INTO users (user_id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
