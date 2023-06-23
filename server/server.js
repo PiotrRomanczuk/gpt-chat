@@ -36,31 +36,7 @@ const DeleteUser = require('./controllers/deleteUser');
 const app = express();
 const PORT = 9000;
 
-const startServer = async () => { 
-    try {
-      startDatabaseConnection(dbPath)
-          .then((db) => {
-            db.all('SELECT * FROM users', (err, rows) => {
-              if (err) {
-                console.error(err.message);
-              } else {
-                console.log(rows);
-              }
-            });
-          })
-        
-          .catch((err) => {
-            console.error('Error connecting to the database:', err);
-          });  
-          
-          app.listen(PORT, () => {
-              console.log(`Server running on port ${PORT}`)
-            })
-      } 
-        catch (err) {
-          console.log(err)
-    }
-}
+const startServer = require('./controllers/startServer')
 
 startServer()
 
